@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Copy/paste this job script into a text file and submit with the command:
+#    sbatch thefilename
+
+#SBATCH --time=48:00:00   # walltime limit (HH:MM:SS)
+#SBATCH --nodes=1   # number of nodes
+#SBATCH --ntasks-per-node=16   # 16 processor core(s) per node
+#SBATCH --partition=scavenger  # huge node(s)
+#SBATCH --job-name="mafft_BB"
+#SBATCH --mail-user=sharmig@iastate.edu   # email address
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --output="mafft.output" # job standard output file (%j replaced by job id)
+#SBATCH --error="mafft.error" # job standard error file (%j replaced by job id)
+
+
+# LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+
+mafft --thread 36 --maxiterate 1000 --genafpair Combined_opsins.aa.fasta > Combined_opsins.aa.mafft-einsi.fa
+
