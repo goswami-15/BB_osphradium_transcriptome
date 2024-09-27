@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Copy/paste this job script into a text file and submit with the command:
+#    sbatch thefilename
+
+#SBATCH --time=48:00:00   # walltime limit (HH:MM:SS)
+#SBATCH --nodes=1   # number of nodes
+#SBATCH --ntasks-per-node=16   # 16 processor core(s) per node
+#SBATCH --partition=scavenger  # huge node(s)
+#SBATCH --job-name="osphr_iqtree2"
+#SBATCH --mail-user=sharmig@iastate.edu   # email address
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+#SBATCH --output="iqtree.output" # job standard output file (%j replaced by job id)
+#SBATCH --error="iqtree.error" # job standard error file (%j replaced by job id)
+
+# LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+
+module load iqtree2/2.2.2.7-py310-kcqit6n
+iqtree2 -nt auto -s Combined_opsins.aa.mafft-einsi.trimal-gappy.phy -B 10000 -m LG+F+G4
+
+
+
+
